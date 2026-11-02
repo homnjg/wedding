@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sam and Minjeong Wedding//KR//KO
+BEGIN:VEVENT
+UID:sam-minjeong-wedding-20270116@homnjg.github.io
+DTSTAMP:20261102T000000Z
+DTSTART:20270116T090000Z
+DTEND:20270116T110000Z
+SUMMARY:샘 ♥ 민정 결혼식
+LOCATION:앰배서더 서울 풀만 호텔 19층 남산룸 (서울 중구 동호로 287)
+DESCRIPTION:샘과 민정의 결혼식에 초대합니다\n모바일 청첩장: https://homnjg.github.io/wedding/kr/
+END:VEVENT
+END:VCALENDAR

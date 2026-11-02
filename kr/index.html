@@ -177,6 +177,10 @@ footer{background:var(--bg2);padding:66px 24px 80px;text-align:center}
 footer .thanks{font-family:var(--script);font-size:58px;color:var(--ink);line-height:1.25}
 footer .f-names{font-family:var(--caps);font-size:13.5px;font-weight:600;letter-spacing:.4em;text-indent:.4em;margin-top:18px;color:#55524a}
 footer .f-date{font-family:var(--caps);font-size:12.5px;letter-spacing:.32em;text-indent:.32em;color:var(--soft);margin-top:8px}
+.foot-btns{display:flex;justify-content:center;gap:10px;margin-top:34px;flex-wrap:wrap}
+.foot-btns button,.foot-btns a{
+  font-family:var(--kr);font-size:15px;letter-spacing:.06em;color:var(--ink);
+  background:transparent;border:1px solid var(--ink);padding:11px 20px;cursor:pointer;text-decoration:none}
 
 @media (max-width:400px){section{padding:46px 20px}}
 @media (prefers-reduced-motion:reduce){
@@ -369,6 +373,10 @@ footer .f-date{font-family:var(--caps);font-size:12.5px;letter-spacing:.32em;tex
     <p class="thanks">Thank you</p>
     <p class="f-names">SAM &amp; MINJEONG</p>
     <p class="f-date">2027 . 01 . 16 . SAT</p>
+    <div class="foot-btns">
+      <button onclick="copyLink()">청첩장 링크 복사</button>
+      <a href="wedding.ics">캘린더에 저장</a>
+    </div>
   </footer>
 </div>
 
@@ -383,7 +391,7 @@ footer .f-date{font-family:var(--caps);font-size:12.5px;letter-spacing:.32em;tex
   </div>
 </div>
 
-<div class="toast" id="toast">계좌번호가 복사되었습니다</div>
+<div class="toast" id="toast"></div>
 
 <script>
 // ── 갤러리: 단독(신부→신랑) → 커플 세로 → 가로 ──
@@ -484,17 +492,21 @@ function tick(){
   document.getElementById('c-s').textContent=pad(s);
 }
 tick(); setInterval(tick,1000);
-// ── 계좌 복사 ──
-function copyAcct(t){
-  const done=()=>{
-    const el=document.getElementById('toast');
-    el.classList.add('show');
-    setTimeout(()=>el.classList.remove('show'),1800);
-  };
+// ── 복사 공통 ──
+function showToast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg;
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),1800);
+}
+function copyText(t,msg){
+  const done=()=>showToast(msg);
   try{
     navigator.clipboard.writeText(t).then(done).catch(()=>fallback(t,done));
   }catch(e){fallback(t,done);}
 }
+function copyAcct(t){copyText(t,'계좌번호가 복사되었습니다');}
+function copyLink(){copyText('https://homnjg.github.io/wedding/kr/','청첩장 링크가 복사되었습니다');}
 function fallback(t,done){
   const ta=document.createElement('textarea');
   ta.value=t;document.body.appendChild(ta);ta.select();
