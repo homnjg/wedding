@@ -160,6 +160,10 @@ footer{background:var(--bg2);padding:66px 24px 80px;text-align:center}
 footer .thanks{font-family:var(--script);font-size:56px;color:var(--ink);line-height:1.25}
 footer .f-names{font-family:var(--caps);font-size:13px;font-weight:600;letter-spacing:.4em;text-indent:.4em;margin-top:18px;color:#55524a}
 footer .f-date{font-family:var(--caps);font-size:12px;letter-spacing:.32em;text-indent:.32em;color:var(--soft);margin-top:8px}
+.foot-btns{display:flex;justify-content:center;gap:10px;margin-top:34px;flex-wrap:wrap}
+.foot-btns button,.foot-btns a{
+  font-family:var(--caps);font-weight:600;font-size:14.5px;letter-spacing:.08em;color:var(--ink);
+  background:transparent;border:1px solid var(--ink);padding:11px 20px;cursor:pointer;text-decoration:none}
 
 @media (max-width:400px){section{padding:60px 20px}}
 @media (prefers-reduced-motion:reduce){
@@ -323,6 +327,10 @@ footer .f-date{font-family:var(--caps);font-size:12px;letter-spacing:.32em;text-
     <p class="thanks">Thank you</p>
     <p class="f-names">SAM &amp; MINJEONG</p>
     <p class="f-date">2027 . 01 . 16 . SAT</p>
+    <div class="foot-btns">
+      <button onclick="copyLink()">Copy Invitation Link</button>
+      <a href="wedding.ics">Add to Calendar</a>
+    </div>
   </footer>
 </div>
 
@@ -419,6 +427,26 @@ function autoStart(){
 );
 bgm.addEventListener('play',setBtn);
 bgm.addEventListener('pause',setBtn);
+// ── Copy link ──
+function showToast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg;
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),1800);
+}
+function fallback(t,done){
+  const ta=document.createElement('textarea');
+  ta.value=t;document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy');done();}catch(e){}
+  document.body.removeChild(ta);
+}
+function copyLink(){
+  const t='https://homnjg.github.io/wedding/';
+  const done=()=>showToast('Link copied');
+  try{
+    navigator.clipboard.writeText(t).then(done).catch(()=>fallback(t,done));
+  }catch(e){fallback(t,done);}
+}
 // ── Countdown ──
 const target=new Date('2027-01-16T18:00:00+09:00').getTime();
 function pad(n){return String(n).padStart(2,'0');}

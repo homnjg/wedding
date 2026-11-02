@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sam and Minjeong Wedding//EN//EN
+BEGIN:VEVENT
+UID:sam-minjeong-wedding-en-20270116@homnjg.github.io
+DTSTAMP:20261102T000000Z
+DTSTART:20270116T090000Z
+DTEND:20270116T110000Z
+SUMMARY:Sam & Minjeong Wedding
+LOCATION:Namsan Room 19F\, The Ambassador Seoul Pullman\, 287 Dongho-ro\, Jung-gu\, Seoul
+DESCRIPTION:Wedding invitation: https://homnjg.github.io/wedding/
+END:VEVENT
+END:VCALENDAR
